@@ -15,9 +15,18 @@ function App() {
     },
   ]);
   const [isStudyMode, setIsStudyMode] = useState(false);
+  const [isBatchImporting, setIsBatchImporting] = useState(false);
 
   const addFlashcard = (flashcard) => {
     setFlashcards([...flashcards, { ...flashcard, id: Date.now() }]);
+  };
+
+  const addMultipleFlashcards = (newFlashcards) => {
+    const flashcardsWithIds = newFlashcards.map((flashcard) => ({
+      ...flashcard,
+      id: Date.now() + Math.random(),
+    }));
+    setFlashcards([...flashcards, ...flashcardsWithIds]);
   };
 
   const deleteFlashcard = (id) => {
@@ -40,15 +49,22 @@ function App() {
     setIsStudyMode(false);
   };
 
+  const toggleBatchImport = () => {
+    setIsBatchImporting(!isBatchImporting);
+  };
+
   return (
     <HomePage
       flashcards={flashcards}
       addFlashcard={addFlashcard}
+      addMultipleFlashcards={addMultipleFlashcards}
       deleteFlashcard={deleteFlashcard}
       editFlashcard={editFlashcard}
       isStudyMode={isStudyMode}
       enterStudyMode={enterStudyMode}
       exitStudyMode={exitStudyMode}
+      isBatchImporting={isBatchImporting}
+      toggleBatchImport={toggleBatchImport}
     />
   );
 }
