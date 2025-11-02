@@ -23,11 +23,20 @@ function App() {
     setFlashcards(flashcards.filter((flashcard) => flashcard.id !== id));
   };
 
+  const editFlashcard = (id, updatedFlashcard) => {
+    setFlashcards(
+      flashcards.map((flashcard) =>
+        flashcard.id === id ? { ...flashcard, ...updatedFlashcard } : flashcard
+      )
+    );
+  };
+
   return (
     <HomePage
       flashcards={flashcards}
       addFlashcard={addFlashcard}
       deleteFlashcard={deleteFlashcard}
+      editFlashcard={editFlashcard}
     />
   );
 }

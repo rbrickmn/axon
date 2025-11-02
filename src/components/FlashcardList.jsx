@@ -1,7 +1,7 @@
 import React from 'react';
 import Flashcard from './Flashcard';
 
-const FlashcardList = ({ flashcards, deleteFlashcard }) => {
+const FlashcardList = ({ flashcards, deleteFlashcard, editFlashcard }) => {
   return (
     <div>
       {flashcards.map((flashcard) => (
@@ -9,6 +9,7 @@ const FlashcardList = ({ flashcards, deleteFlashcard }) => {
           key={flashcard.id}
           flashcard={flashcard}
           deleteFlashcard={deleteFlashcard}
+          editFlashcard={editFlashcard}
         />
       ))}
     </div>
