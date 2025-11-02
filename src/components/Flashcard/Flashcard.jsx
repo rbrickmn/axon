@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import EditFlashcardForm from './EditFlashcardForm';
+import EditFlashcardForm from '../EditFlashcardForm/EditFlashcardForm';
 
 const Flashcard = ({ flashcard, deleteFlashcard, editFlashcard }) => {
   const [isEditing, setIsEditing] = useState(false);

@@ -1,7 +1,7 @@
 import React from 'react';
-import FlashcardList from '../components/FlashcardList';
-import FlashcardForm from '../components/FlashcardForm';
-import StudyMode from '../components/StudyMode';
+import FlashcardList from '../components/FlashcardList/FlashcardList';
+import FlashcardForm from '../components/FlashcardForm/FlashcardForm';
+import StudyMode from '../components/StudyMode/StudyMode';
 
 const HomePage = ({
   flashcards,
