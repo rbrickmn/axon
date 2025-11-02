@@ -1,19 +1,20 @@
-import React, { useState } from "react";
-import HomePage from "./pages/HomePage";
+import React, { useState } from 'react';
+import HomePage from './pages/HomePage';
 
 function App() {
   const [flashcards, setFlashcards] = useState([
     {
       id: 1,
-      question: "What is React?",
-      answer: "A JavaScript library for building user interfaces.",
+      question: 'What is React?',
+      answer: 'A JavaScript library for building user interfaces.',
     },
     {
       id: 2,
-      question: "What is JSX?",
-      answer: "A syntax extension for JavaScript.",
+      question: 'What is JSX?',
+      answer: 'A syntax extension for JavaScript.',
     },
   ]);
+  const [isStudyMode, setIsStudyMode] = useState(false);
 
   const addFlashcard = (flashcard) => {
     setFlashcards([...flashcards, { ...flashcard, id: Date.now() }]);
@@ -31,14 +32,26 @@ function App() {
     );
   };
 
+  const enterStudyMode = () => {
+    setIsStudyMode(true);
+  };
+
+  const exitStudyMode = () => {
+    setIsStudyMode(false);
+  };
+
   return (
     <HomePage
       flashcards={flashcards}
       addFlashcard={addFlashcard}
       deleteFlashcard={deleteFlashcard}
       editFlashcard={editFlashcard}
+      isStudyMode={isStudyMode}
+      enterStudyMode={enterStudyMode}
+      exitStudyMode={exitStudyMode}
     />
   );
 }
 
 export default App;
+
