@@ -1,5 +1,5 @@
-import React from 'react';
-import Flashcard from './Flashcard';
+import React from "react";
+import Flashcard from "./Flashcard";
 
 const FlashcardList = ({ flashcards, deleteFlashcard, editFlashcard }) => {
   return (

@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import HomePage from './pages/HomePage';
+import React, { useState } from "react";
+import HomePage from "./pages/HomePage";
 
 function App() {
   const [flashcards, setFlashcards] = useState([
     {
       id: 1,
-      question: 'What is React?',
-      answer: 'A JavaScript library for building user interfaces.',
+      question: "What is React?",
+      answer: "A JavaScript library for building user interfaces.",
     },
     {
       id: 2,
-      question: 'What is JSX?',
-      answer: 'A syntax extension for JavaScript.',
+      question: "What is JSX?",
+      answer: "A syntax extension for JavaScript.",
     },
   ]);
 
