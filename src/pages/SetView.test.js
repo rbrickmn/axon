@@ -62,6 +62,8 @@ describe('SetView', () => {
       />
     );
     expect(screen.getByText('Exit Study Mode')).toBeInTheDocument();
+  });
+
   it('disables and fades the Study Mode button when the set is empty', () => {
     const emptySet = { ...mockSet, flashcards: [] };
     render(
