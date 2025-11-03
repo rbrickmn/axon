@@ -62,5 +62,25 @@ describe('SetView', () => {
       />
     );
     expect(screen.getByText('Exit Study Mode')).toBeInTheDocument();
+  it('disables and fades the Study Mode button when the set is empty', () => {
+    const emptySet = { ...mockSet, flashcards: [] };
+    render(
+      <SetView
+        set={emptySet}
+        deselectSet={mockDeselectSet}
+        addFlashcard={mockAddFlashcard}
+        addMultipleFlashcards={mockAddMultipleFlashcards}
+        deleteFlashcard={mockDeleteFlashcard}
+        editFlashcard={mockEditFlashcard}
+        isStudyMode={false}
+        enterStudyMode={mockEnterStudyMode}
+        exitStudyMode={mockExitStudyMode}
+        isBatchImporting={false}
+        toggleBatchImport={mockToggleBatchImport}
+      />
+    );
+    const studyModeButton = screen.getByText('Study Mode');
+    expect(studyModeButton).toBeDisabled();
+    expect(studyModeButton).toHaveStyle('opacity: 0.5');
   });
 });

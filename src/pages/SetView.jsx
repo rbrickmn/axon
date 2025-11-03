@@ -1,8 +1,8 @@
-import React from 'react';
-import FlashcardList from '../components/FlashcardList/FlashcardList';
-import FlashcardForm from '../components/FlashcardForm/FlashcardForm';
-import StudyMode from '../components/StudyMode/StudyMode';
-import BatchImportForm from '../components/BatchImportForm/BatchImportForm';
+import React from "react";
+import FlashcardList from "../components/FlashcardList/FlashcardList";
+import FlashcardForm from "../components/FlashcardForm/FlashcardForm";
+import StudyMode from "../components/StudyMode/StudyMode";
+import BatchImportForm from "../components/BatchImportForm/BatchImportForm";
 
 const SetView = ({
   set,
@@ -32,7 +32,16 @@ const SetView = ({
         />
       ) : (
         <>
-          <button onClick={enterStudyMode}>Study Mode</button>
+          <button
+            onClick={enterStudyMode}
+            disabled={set.flashcards.length === 0}
+            style={{
+              opacity: set.flashcards.length === 0 ? 0.5 : 1,
+              cursor: set.flashcards.length === 0 ? "not-allowed" : "pointer",
+            }}
+          >
+            Study Mode
+          </button>
           <button onClick={toggleBatchImport}>Batch Import</button>
           <FlashcardForm
             addFlashcard={(flashcard) => addFlashcard(set.id, flashcard)}
