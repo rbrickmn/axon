@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import HomePage from './pages/HomePage';
-import SetView from './pages/SetView'; // This will be the renamed HomePage
+import SetView from './pages/SetView';
+import AppShell from './components/layout/AppShell';
+import Header from './components/layout/Header';
+import Sidebar from './components/layout/Sidebar';
+import MainContent from './components/layout/MainContent';
 
 function App() {
   const [sets, setSets] = useState([
@@ -134,33 +138,38 @@ function App() {
   const selectedSet = sets.find((set) => set.id === selectedSetId);
 
   return (
-    <>
-      {selectedSetId ? (
-        <SetView
-          set={selectedSet}
-          deselectSet={deselectSet}
-          addFlashcard={addFlashcard}
-          addMultipleFlashcards={addMultipleFlashcards}
-          deleteFlashcard={deleteFlashcard}
-          editFlashcard={editFlashcard}
-          isStudyMode={isStudyMode}
-          enterStudyMode={enterStudyMode}
-          exitStudyMode={exitStudyMode}
-          isBatchImporting={isBatchImporting}
-          toggleBatchImport={toggleBatchImport}
-        />
-      ) : (
-        <HomePage
-          sets={sets}
-          addSet={addSet}
-          editSet={editSet}
-          deleteSet={deleteSet}
-          selectSet={selectSet}
-        />
-      )}
-    </>
+    <AppShell>
+      <Sidebar />
+      <div className="flex flex-col">
+        <Header />
+        <MainContent>
+          {selectedSetId ? (
+            <SetView
+              set={selectedSet}
+              deselectSet={deselectSet}
+              addFlashcard={addFlashcard}
+              addMultipleFlashcards={addMultipleFlashcards}
+              deleteFlashcard={deleteFlashcard}
+              editFlashcard={editFlashcard}
+              isStudyMode={isStudyMode}
+              enterStudyMode={enterStudyMode}
+              exitStudyMode={exitStudyMode}
+              isBatchImporting={isBatchImporting}
+              toggleBatchImport={toggleBatchImport}
+            />
+          ) : (
+            <HomePage
+              sets={sets}
+              addSet={addSet}
+              editSet={editSet}
+              deleteSet={deleteSet}
+              selectSet={selectSet}
+            />
+          )}
+        </MainContent>
+      </div>
+    </AppShell>
   );
 }
 
 export default App;
-
