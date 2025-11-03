@@ -1,9 +1,9 @@
 import React from 'react';
-import { Package2 } from 'lucide-react';
+import { Package2, PlusCircle } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { cn } from '../../utils/cn';
 
-const Sidebar = ({ sets, selectSet, selectedSetId }) => {
+const Sidebar = ({ sets, selectSet, selectedSetId, openCreateSetModal }) => {
   return (
     <div className="hidden border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
@@ -15,6 +15,14 @@ const Sidebar = ({ sets, selectSet, selectedSetId }) => {
         </div>
         <div className="flex-1">
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+            <Button
+              variant="outline"
+              className="justify-start gap-2 my-2"
+              onClick={openCreateSetModal}
+            >
+              <PlusCircle className="h-4 w-4" />
+              Create Set
+            </Button>
             <p className="text-muted-foreground px-2 py-2">Your Sets</p>
             {sets.map((set) => (
               <Button

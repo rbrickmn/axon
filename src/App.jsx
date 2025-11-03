@@ -29,12 +29,17 @@ function App() {
   const [selectedSetId, setSelectedSetId] = useState(null);
   const [isStudyMode, setIsStudyMode] = useState(false);
   const [isBatchImporting, setIsBatchImporting] = useState(false);
+  const [isCreateSetModalOpen, setIsCreateSetModalOpen] = useState(false);
+
+  const openCreateSetModal = () => setIsCreateSetModalOpen(true);
+  const closeCreateSetModal = () => setIsCreateSetModalOpen(false);
 
   const addSet = (name, description) => {
     setSets([
       ...sets,
       { id: Date.now(), name, description, flashcards: [] },
     ]);
+    closeCreateSetModal();
   };
 
   const editSet = (setId, newName, newDescription) => {
@@ -139,7 +144,7 @@ function App() {
 
   return (
     <AppShell>
-      <Sidebar sets={sets} selectSet={selectSet} selectedSetId={selectedSetId} />
+      <Sidebar sets={sets} selectSet={selectSet} selectedSetId={selectedSetId} openCreateSetModal={openCreateSetModal} />
       <div className="flex flex-col">
         <Header />
         <MainContent>
@@ -164,6 +169,8 @@ function App() {
               editSet={editSet}
               deleteSet={deleteSet}
               selectSet={selectSet}
+              isCreateSetModalOpen={isCreateSetModalOpen}
+              closeCreateSetModal={closeCreateSetModal}
             />
           )}
         </MainContent>
