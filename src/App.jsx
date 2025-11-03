@@ -139,7 +139,7 @@ function App() {
 
   return (
     <AppShell>
-      <Sidebar />
+      <Sidebar sets={sets} selectSet={selectSet} selectedSetId={selectedSetId} />
       <div className="flex flex-col">
         <Header />
         <MainContent>

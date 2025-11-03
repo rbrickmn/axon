@@ -4,8 +4,8 @@ import SetForm from '../components/SetForm/SetForm';
 
 const HomePage = ({ sets, addSet, editSet, deleteSet, selectSet }) => {
   return (
-    <div>
-      <h1>Flashcard Sets</h1>
+    <div className="space-y-6">
+      <h1 className="text-3xl font-bold">Flashcard Sets</h1>
       <SetForm addSet={addSet} />
       <SetList
         sets={sets}

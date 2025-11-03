@@ -3,7 +3,7 @@ import Flashcard from "../Flashcard/Flashcard";
 
 const FlashcardList = ({ flashcards, deleteFlashcard, editFlashcard }) => {
   return (
-    <div>
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {flashcards.map((flashcard) => (
         <Flashcard
           key={flashcard.id}

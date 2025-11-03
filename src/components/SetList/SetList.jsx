@@ -3,7 +3,7 @@ import SetListItem from '../SetListItem/SetListItem';
 
 const SetList = ({ sets, editSet, deleteSet, selectSet }) => {
   return (
-    <div>
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {sets.map((set) => (
         <SetListItem
           key={set.id}

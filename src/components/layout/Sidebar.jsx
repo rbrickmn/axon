@@ -1,7 +1,9 @@
 import React from 'react';
 import { Package2 } from 'lucide-react';
+import { Button } from '../ui/Button';
+import { cn } from '../../utils/cn';
 
-const Sidebar = () => {
+const Sidebar = ({ sets, selectSet, selectedSetId }) => {
   return (
     <div className="hidden border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
@@ -13,8 +15,20 @@ const Sidebar = () => {
         </div>
         <div className="flex-1">
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-            {/* Sidebar content will go here (e.g., list of sets) */}
-            <p className="text-muted-foreground">Your Sets</p>
+            <p className="text-muted-foreground px-2 py-2">Your Sets</p>
+            {sets.map((set) => (
+              <Button
+                key={set.id}
+                variant="ghost"
+                className={cn(
+                  "justify-start",
+                  selectedSetId === set.id && "bg-accent"
+                )}
+                onClick={() => selectSet(set.id)}
+              >
+                {set.name}
+              </Button>
+            ))}
           </nav>
         </div>
       </div>

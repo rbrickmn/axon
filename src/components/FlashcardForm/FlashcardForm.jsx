@@ -1,8 +1,14 @@
 import React, { useState } from "react";
+import { Button } from "../ui/Button";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card";
+import { Input } from "../ui/Input";
+import { Label } from "../ui/Label";
+import AlertDialog from "../ui/AlertDialog";
 
 const FlashcardForm = ({ addFlashcard }) => {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,7 +19,7 @@ const FlashcardForm = ({ addFlashcard }) => {
 
     // If either field is empty, show an alert and return
     if (!trimmedQuestion || !trimmedAnswer) {
-      alert("Please fill out all fields");
+      setIsAlertOpen(true);
       return;
     }
 
@@ -26,21 +32,44 @@ const FlashcardForm = ({ addFlashcard }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Question"
-        value={question}
-        onChange={(e) => setQuestion(e.target.value)}
+    <>
+      <Card>
+        <CardHeader>
+          <CardTitle>Create a New Flashcard</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="question">Question</Label>
+              <Input
+                id="question"
+                type="text"
+                placeholder="Enter question"
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="answer">Answer</Label>
+              <Input
+                id="answer"
+                type="text"
+                placeholder="Enter answer"
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+              />
+            </div>
+            <Button type="submit">Add Flashcard</Button>
+          </form>
+        </CardContent>
+      </Card>
+      <AlertDialog
+        open={isAlertOpen}
+        onClose={() => setIsAlertOpen(false)}
+        title="Invalid Input"
+        description="Please fill out all fields."
       />
-      <input
-        type="text"
-        placeholder="Answer"
-        value={answer}
-        onChange={(e) => setAnswer(e.target.value)}
-      />
-      <button type="submit">Add Flashcard</button>
-    </form>
+    </>
   );
 };
 

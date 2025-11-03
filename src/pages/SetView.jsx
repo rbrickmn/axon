@@ -3,6 +3,8 @@ import FlashcardList from "../components/FlashcardList/FlashcardList";
 import FlashcardForm from "../components/FlashcardForm/FlashcardForm";
 import StudyMode from "../components/StudyMode/StudyMode";
 import BatchImportForm from "../components/BatchImportForm/BatchImportForm";
+import { Button } from "../components/ui/Button";
+import { ArrowLeft } from "lucide-react";
 
 const SetView = ({
   set,
@@ -18,9 +20,12 @@ const SetView = ({
   toggleBatchImport,
 }) => {
   return (
-    <div>
-      <button onClick={deselectSet}>Back to Sets</button>
-      <h1>{set.name}</h1>
+    <div className="space-y-6">
+      <Button variant="outline" onClick={deselectSet}>
+        <ArrowLeft className="h-4 w-4 mr-2" />
+        Back to Sets
+      </Button>
+      <h1 className="text-3xl font-bold">{set.name}</h1>
       {isStudyMode ? (
         <StudyMode flashcards={set.flashcards} exitStudyMode={exitStudyMode} />
       ) : isBatchImporting ? (
@@ -32,17 +37,17 @@ const SetView = ({
         />
       ) : (
         <>
-          <button
-            onClick={enterStudyMode}
-            disabled={set.flashcards.length === 0}
-            style={{
-              opacity: set.flashcards.length === 0 ? 0.5 : 1,
-              cursor: set.flashcards.length === 0 ? "not-allowed" : "pointer",
-            }}
-          >
-            Study Mode
-          </button>
-          <button onClick={toggleBatchImport}>Batch Import</button>
+          <div className="flex gap-2">
+            <Button
+              onClick={enterStudyMode}
+              disabled={set.flashcards.length === 0}
+            >
+              Study Mode
+            </Button>
+            <Button variant="secondary" onClick={toggleBatchImport}>
+              Batch Import
+            </Button>
+          </div>
           <FlashcardForm
             addFlashcard={(flashcard) => addFlashcard(set.id, flashcard)}
           />
