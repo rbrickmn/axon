@@ -13,7 +13,7 @@ const SetForm = ({ addSet }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name.trim()) {
-      addSet(name, description);
+      addSet(name.trim(), description.trim());
       setName('');
       setDescription('');
     } else {
