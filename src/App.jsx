@@ -31,6 +31,9 @@ function App() {
   const [isStudyMode, setIsStudyMode] = useState(false);
   const [isBatchImporting, setIsBatchImporting] = useState(false);
   const [isCreateSetModalOpen, setIsCreateSetModalOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   const openCreateSetModal = () => setIsCreateSetModalOpen(true);
   const closeCreateSetModal = () => setIsCreateSetModalOpen(false);
@@ -146,9 +149,9 @@ function App() {
   return (
     <>
       <AppShell>
-        <Sidebar sets={sets} selectSet={selectSet} selectedSetId={selectedSetId} openCreateSetModal={openCreateSetModal} />
-        <div className="flex flex-col">
-          <Header />
+        <Sidebar sets={sets} selectSet={selectSet} selectedSetId={selectedSetId} openCreateSetModal={openCreateSetModal} isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        <div className="flex flex-col md:ml-[220px] lg:ml-[280px]">
+          <Header toggleSidebar={toggleSidebar} />
           <MainContent>
             {selectedSetId ? (
               <SetView
