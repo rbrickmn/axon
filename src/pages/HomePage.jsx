@@ -15,12 +15,16 @@ const HomePage = ({
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold">Flashcard Sets</h1>
-      <SetList
-        sets={sets}
-        editSet={editSet}
-        deleteSet={deleteSet}
-        selectSet={selectSet}
-      />
+      {sets.length === 0 ? (
+        <p className="text-muted-foreground">You currently have no sets. Create one!</p>
+      ) : (
+        <SetList
+          sets={sets}
+          editSet={editSet}
+          deleteSet={deleteSet}
+          selectSet={selectSet}
+        />
+      )}
       <Dialog open={isCreateSetModalOpen} onClose={closeCreateSetModal}>
         <SetForm addSet={addSet} />
       </Dialog>

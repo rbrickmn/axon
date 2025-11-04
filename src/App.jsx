@@ -6,28 +6,11 @@ import Header from './components/layout/Header';
 import Sidebar from './components/layout/Sidebar';
 import MainContent from './components/layout/MainContent';
 import StudyMode from './components/StudyMode/StudyMode';
+import useLocalStorage from './hooks/useLocalStorage';
 
 function App() {
-  const [sets, setSets] = useState([
-    {
-      id: 1,
-      name: 'React Basics',
-      description: 'Fundamental concepts of React.',
-      flashcards: [
-        {
-          id: 101,
-          question: 'What is React?',
-          answer: 'A JavaScript library for building user interfaces.',
-        },
-        {
-          id: 102,
-          question: 'What is JSX?',
-          answer: 'A syntax extension for JavaScript.',
-        },
-      ],
-    },
-  ]);
-  const [selectedSetId, setSelectedSetId] = useState(null);
+  const [sets, setSets] = useLocalStorage('axon-sets', []);
+  const [selectedSetId, setSelectedSetId] = useLocalStorage('axon-selectedSetId', null);
   const [isStudyMode, setIsStudyMode] = useState(false);
   const [isBatchImporting, setIsBatchImporting] = useState(false);
   const [isCreateSetModalOpen, setIsCreateSetModalOpen] = useState(false);

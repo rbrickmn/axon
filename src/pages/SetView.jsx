@@ -73,6 +73,9 @@ const SetView = ({
               editFlashcard(set.id, flashcardId, updatedFlashcard)
             }
           />
+          {set.flashcards.length === 0 && (
+            <p className="text-muted-foreground">You currently have no flashcards in this set. Create one!</p>
+          )}
           <Dialog open={isCreateFlashcardModalOpen} onClose={closeCreateFlashcardModal}>
             <FlashcardForm addFlashcard={handleAddFlashcard} />
           </Dialog>
