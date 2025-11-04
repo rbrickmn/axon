@@ -5,6 +5,7 @@ import AppShell from './components/layout/AppShell';
 import Header from './components/layout/Header';
 import Sidebar from './components/layout/Sidebar';
 import MainContent from './components/layout/MainContent';
+import StudyMode from './components/StudyMode/StudyMode';
 
 function App() {
   const [sets, setSets] = useState([
@@ -143,39 +144,47 @@ function App() {
   const selectedSet = sets.find((set) => set.id === selectedSetId);
 
   return (
-    <AppShell>
-      <Sidebar sets={sets} selectSet={selectSet} selectedSetId={selectedSetId} openCreateSetModal={openCreateSetModal} />
-      <div className="flex flex-col">
-        <Header />
-        <MainContent>
-          {selectedSetId ? (
-            <SetView
-              set={selectedSet}
-              deselectSet={deselectSet}
-              addFlashcard={addFlashcard}
-              addMultipleFlashcards={addMultipleFlashcards}
-              deleteFlashcard={deleteFlashcard}
-              editFlashcard={editFlashcard}
-              isStudyMode={isStudyMode}
-              enterStudyMode={enterStudyMode}
-              exitStudyMode={exitStudyMode}
-              isBatchImporting={isBatchImporting}
-              toggleBatchImport={toggleBatchImport}
-            />
-          ) : (
-            <HomePage
-              sets={sets}
-              addSet={addSet}
-              editSet={editSet}
-              deleteSet={deleteSet}
-              selectSet={selectSet}
-              isCreateSetModalOpen={isCreateSetModalOpen}
-              closeCreateSetModal={closeCreateSetModal}
-            />
-          )}
-        </MainContent>
-      </div>
-    </AppShell>
+    <>
+      <AppShell>
+        <Sidebar sets={sets} selectSet={selectSet} selectedSetId={selectedSetId} openCreateSetModal={openCreateSetModal} />
+        <div className="flex flex-col">
+          <Header />
+          <MainContent>
+            {selectedSetId ? (
+              <SetView
+                set={selectedSet}
+                deselectSet={deselectSet}
+                addFlashcard={addFlashcard}
+                addMultipleFlashcards={addMultipleFlashcards}
+                deleteFlashcard={deleteFlashcard}
+                editFlashcard={editFlashcard}
+                isStudyMode={isStudyMode}
+                enterStudyMode={enterStudyMode}
+                exitStudyMode={exitStudyMode}
+                isBatchImporting={isBatchImporting}
+                toggleBatchImport={toggleBatchImport}
+              />
+            ) : (
+              <HomePage
+                sets={sets}
+                addSet={addSet}
+                editSet={editSet}
+                deleteSet={deleteSet}
+                selectSet={selectSet}
+                isCreateSetModalOpen={isCreateSetModalOpen}
+                closeCreateSetModal={closeCreateSetModal}
+              />
+            )}
+          </MainContent>
+        </div>
+      </AppShell>
+      {isStudyMode && selectedSet && (
+        <StudyMode
+          flashcards={selectedSet.flashcards}
+          exitStudyMode={exitStudyMode}
+        />
+      )}
+    </>
   );
 }
 

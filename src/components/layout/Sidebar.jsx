@@ -1,5 +1,5 @@
 import React from 'react';
-import { Package2, PlusCircle } from 'lucide-react';
+import { Home, PlusCircle } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { cn } from '../../utils/cn';
 
@@ -9,7 +9,7 @@ const Sidebar = ({ sets, selectSet, selectedSetId, openCreateSetModal }) => {
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
           <a href="/" className="flex items-center gap-2 font-semibold">
-            <Package2 className="h-6 w-6" aria-hidden="true" />
+            <Home className="h-6 w-6" aria-hidden="true" />
             <span className="">Axon</span>
           </a>
         </div>

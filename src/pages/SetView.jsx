@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import FlashcardList from "../components/FlashcardList/FlashcardList";
 import FlashcardForm from "../components/FlashcardForm/FlashcardForm";
 import StudyMode from "../components/StudyMode/StudyMode";
 import BatchImportForm from "../components/BatchImportForm/BatchImportForm";
 import { Button } from "../components/ui/Button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, PlusCircle } from "lucide-react";
+import { Dialog } from "../components/ui/Dialog";
 
 const SetView = ({
   set,
@@ -19,6 +20,16 @@ const SetView = ({
   isBatchImporting,
   toggleBatchImport,
 }) => {
+  const [isCreateFlashcardModalOpen, setIsCreateFlashcardModalOpen] = useState(false);
+
+  const openCreateFlashcardModal = () => setIsCreateFlashcardModalOpen(true);
+  const closeCreateFlashcardModal = () => setIsCreateFlashcardModalOpen(false);
+
+  const handleAddFlashcard = (flashcard) => {
+    addFlashcard(set.id, flashcard);
+    closeCreateFlashcardModal();
+  };
+
   return (
     <div className="space-y-6">
       <Button variant="outline" onClick={deselectSet}>
@@ -26,9 +37,8 @@ const SetView = ({
         Back to Sets
       </Button>
       <h1 className="text-3xl font-bold">{set.name}</h1>
-      {isStudyMode ? (
-        <StudyMode flashcards={set.flashcards} exitStudyMode={exitStudyMode} />
-      ) : isBatchImporting ? (
+      {set.description && <p className="text-muted-foreground">{set.description}</p>}
+      {isBatchImporting ? (
         <BatchImportForm
           addMultipleFlashcards={(newFlashcards) =>
             addMultipleFlashcards(set.id, newFlashcards)
@@ -37,20 +47,23 @@ const SetView = ({
         />
       ) : (
         <>
-          <div className="flex gap-2">
-            <Button
-              onClick={enterStudyMode}
-              disabled={set.flashcards.length === 0}
-            >
-              Study Mode
-            </Button>
-            <Button variant="secondary" onClick={toggleBatchImport}>
-              Batch Import
+          <div className="flex justify-between items-center">
+            <div className="flex gap-2">
+              <Button
+                onClick={enterStudyMode}
+                disabled={set.flashcards.length === 0}
+              >
+                Study Mode
+              </Button>
+              <Button variant="secondary" onClick={toggleBatchImport}>
+                Batch Import
+              </Button>
+            </div>
+            <Button onClick={openCreateFlashcardModal}>
+              <PlusCircle className="h-4 w-4 mr-2" />
+              Create Flashcard
             </Button>
           </div>
-          <FlashcardForm
-            addFlashcard={(flashcard) => addFlashcard(set.id, flashcard)}
-          />
           <FlashcardList
             flashcards={set.flashcards}
             deleteFlashcard={(flashcardId) =>
@@ -60,6 +73,9 @@ const SetView = ({
               editFlashcard(set.id, flashcardId, updatedFlashcard)
             }
           />
+          <Dialog open={isCreateFlashcardModalOpen} onClose={closeCreateFlashcardModal}>
+            <FlashcardForm addFlashcard={handleAddFlashcard} />
+          </Dialog>
         </>
       )}
     </div>
